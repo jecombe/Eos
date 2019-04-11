@@ -8,9 +8,9 @@ let createAccount = createKeys();
 createAccount.then(function (result) {
 
     const config1 = {
-        chainId: "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473", // 32 byte (64 char) hex string
-        keyProvider: ['5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'], // WIF string or array of keys..
-        httpEndpoint: 'http://jungle2.cryptolions.io:80', // jungle testnet
+        chainId: "", // 32 byte (64 char) hex string
+        keyProvider: [''], // WIF string or array of keys..
+        httpEndpoint: '', // jungle testnet
         expireInSeconds: 60,
         broadcast: true,
         verbose: false, // API activity
@@ -18,7 +18,7 @@ createAccount.then(function (result) {
     };
 
     options = {
-        authorization: 'aqsxcdfreswx@active', 
+        authorization: '@active', 
         broadcast: true,
         sign: true,
     }
@@ -27,20 +27,20 @@ createAccount.then(function (result) {
 
     eos.transaction(tr => {
         tr.newaccount({
-            creator: 'aqsxcdfreswx',
-            name: 'pockerotoken',
+            creator: '',
+            name: '',
             owner: result.public,
             active: result.public
         })
         tr.buyrambytes({
-            payer: 'aqsxcdfreswx',
-            receiver: 'pockerotoken',
+            payer: '',
+            receiver: '',
             bytes: 2996 
         });
     
         tr.delegatebw({
-            from: 'aqsxcdfreswx',
-            receiver: 'pockerotoken',
+            from: '',
+            receiver: '',
             stake_net_quantity: '1.0000 EOS', 
             stake_cpu_quantity: '1.0000 EOS', 
             transfer: 0
