@@ -16,7 +16,7 @@ function randomNameAccount() {
     return (randomstring);
 }
 
-createAccount.then(function (result) {
+createAccount.then(function test(key) {
 
     var nameNewAcct = randomNameAccount();
 
@@ -42,8 +42,8 @@ createAccount.then(function (result) {
         tr.newaccount({
             creator: 'aqsxcdfreswx',
             name: nameNewAcct,
-            owner: result.public,
-            active: result.public
+            owner: key.public,
+            active: key.public
         })
         tr.buyrambytes({
             payer: 'aqsxcdfreswx',
@@ -58,7 +58,16 @@ createAccount.then(function (result) {
             stake_cpu_quantity: '1.0000 EOS',
             transfer: 0
         });
-        console.log("NAME: ", nameNewAcct, "PUBLIC KEY:", result.public, "PRIVATE KEY:", result.private);
-    }, options)//.then( (resp) =>{
-       //console.log("=====================================> ", resp)});
+        console.log("NAME: ", nameNewAcct, "PUBLIC KEY:", key.public, "PRIVATE KEY:", key.private);
+    }, options).catch(error => {
+        if (error) {
+            var json = JSON.parse(error);
+            if (json.error.name === 'account_name_exists_exception') {
+                console.log('ERROR: ');
+            }
+        }
+        else {
+            console.log("=====================================> ", resp)
+        }
+    });
 });
